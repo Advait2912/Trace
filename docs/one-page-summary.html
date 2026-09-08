@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TRACE: In-Context Learning with Recurrent Memory — One-Page Concept Summary</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 8.8pt;
+      line-height: 1.35;
+      color: #1a202c;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      border-bottom: 2px solid #2b6cb0;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 14pt;
+      margin: 0 0 2px 0;
+      color: #1a365d;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 9.5pt;
+      color: #2b6cb0;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .meta-tag {
+      font-size: 7.5pt;
+      color: #718096;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h2 {
+      font-size: 9.5pt;
+      color: #2c5282;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 2px;
+      margin: 6px 0 3px 0;
+      font-weight: 700;
+    }
+    p {
+      margin: 0 0 4px 0;
+    }
+    ul, ol {
+      margin: 0 0 4px 0;
+      padding-left: 14px;
+    }
+    li {
+      margin-bottom: 2px;
+    }
+    .claim-box {
+      background: #ebf8ff;
+      border-left: 3px solid #3182ce;
+      padding: 5px 8px;
+      margin-bottom: 6px;
+      border-radius: 2px;
+      font-size: 8.5pt;
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+    .claim-box strong {
+      color: #2c5282;
+    }
+    code {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 8pt;
+      background: #edf2f7;
+      padding: 1px 3px;
+      border-radius: 2px;
+      color: #2d3748;
+    }
+    .math-block {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      padding: 3px 8px;
+      border-radius: 3px;
+      text-align: center;
+      font-family: ui-monospace, monospace;
+      font-size: 8.5pt;
+      color: #2b6cb0;
+      margin: 3px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.5pt;
+      margin: 4px 0;
+    }
+    th, td {
+      border: 1px solid #cbd5e0;
+      padding: 3px 5px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f7fafc;
+      color: #2d3748;
+      font-weight: 700;
+    }
+    .boundary-box {
+      background: #fffaf0;
+      border-left: 3px solid #dd6b20;
+      padding: 4px 6px;
+      margin: 4px 0;
+      font-size: 8pt;
+      color: #7b341e;
+    }
+    .two-col {
+      display: flex;
+      gap: 10px;
+    }
+    .col {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>TRACE: Memory in Motion</h1>
+    <div class="subtitle">In-Context Learning with Recurrent Memory</div>
+    <div class="meta-tag">Authoritative Technical Concept Briefing | DataForge 2026 &times; Pathway Track (PS1)</div>
+  </header>
+
+  <div class="claim-box">
+    <strong>The Central Falsifiable Claim:</strong> A fixed-size recurrent state can absorb an unbounded sequence of key&ndash;value demonstrations without growing in memory footprint. However, when demonstrations share overlapping (non-orthogonal) keys, readout for one leaks the value of the other &mdash; a deterministic, mathematically provable form of forgetting caused by bounded geometric capacity, not an arbitrary scripted failure. Increasing state dimension <em>d</em> expands the orthogonal basis, directly eliminating interference.
+  </div>
+
+  <h2>1. Motivation: The Transformer Context Bottleneck</h2>
+  <p>
+    Standard Transformer LLMs process in-context demonstrations by appending representations to an uncompressed Key-Value (KV) cache. This creates severe design pressures: (1) <strong>Unbounded Memory &amp; Latency:</strong> KV memory scales linearly <em>O(T)</em> with sequence length, exhausting GPU SRAM/HBM limits and increasing generation cost per token; (2) <strong>Externalized Reasoning:</strong> Transformers cannot compress demonstrations into persistent internal state; they must emit long &quot;Chain-of-Thought&quot; (CoT) text tokens to perform multi-step deduction.
+    <strong>The Recurrent Alternative:</strong> Recurrent fast weights compress sequential demonstrations into an evolving internal state matrix of invariant size (<em>S</em> &isin; &reals;<sup><em>d&times;d</em></sup>). Memory footprint and per-step inference compute remain strictly <em>O(1)</em> with respect to sequence length <em>T</em>.
+  </p>
+
+  <h2>2. The Computational Substrate</h2>
+  <p>
+    TRACE implements the canonical formulation of recurrent associative fast weights:
+  </p>
+  <ul>
+    <li><strong>Recurrent State:</strong> <em>S<sub>t</sub></em> &isin; &reals;<sup><em>d&times;d</em></sup>, initialized to <em>S<sub>0</sub></em> = <strong>0</strong><sub><em>d&times;d</em></sub>. Memory footprint is strictly <em>d</em><sup>2</sup> scalars, independent of sequence length <em>T</em>.</li>
+    <li><strong>Demonstration Write (Outer-Product Update):</strong> For key <em>k<sub>t</sub></em> &isin; &reals;<sup><em>d</em></sup> and value carrier <em>v<sub>t</sub></em> &isin; &reals;<sup><em>d</em></sup>:
+      <div class="math-block">S<sub>t</sub> = S<sub>t-1</sub> + v<sub>t</sub> k<sub>t</sub><sup>T</sup></div>
+    </li>
+    <li><strong>Normalized Readout:</strong> Given query key <em>k<sub>q</sub></em> &isin; &reals;<sup><em>d</em></sup>, the scalar prediction projects <em>S<sub>t</sub></em> onto <em>k<sub>q</sub></em>:
+      <div class="math-block">&ycirc; = (S<sub>t</sub> k<sub>q</sub>) / (k<sub>q</sub> &middot; k<sub>q</sub>)</div>
+    </li>
+    <li><strong>Derived Interference Theorem:</strong> Decomposing <em>S<sub>T</sub></em> = &sum; <em>v<sub>i</sub> k<sub>i</sub><sup>T</sup></em>, querying key <em>k<sub>a</sub></em> yields:
+      <div class="math-block">&ycirc;<sub>a</sub> = v<sub>a</sub> + &sum;<sub>b &ne; a</sub> [ (k<sub>a</sub> &middot; k<sub>b</sub>) / (k<sub>a</sub> &middot; k<sub>a</sub>) ] v<sub>b</sub></div>
+      When keys are mutually orthogonal (<em>k<sub>a</sub> &middot; k<sub>b</sub></em> = 0), cross-talk is zero. When keys overlap (<em>k<sub>a</sub> &middot; k<sub>b</sub></em> &ne; 0), memory leakage is governed entirely by the cosine projection, proving that forgetting is geometric rather than stochastic.
+    </li>
+  </ul>
+
+  <h2>3. Rigorous Architectural Comparison</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>Standard Transformer (KV Cache)</th>
+        <th>Linear Transformers / Fast Weights</th>
+        <th>BDH-CQ (Demonstration Variant)</th>
+        <th>TRACE (Educational Toy Model)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Inference State</strong></td>
+        <td>Expanding <em>O(T)</em> tokens</td>
+        <td>Constant <em>O(d<sup>2</sup>)</em> matrix</td>
+        <td>Constant <em>O(d<sup>2</sup>)</em> state <em>S</em></td>
+        <td>Constant <em>O(d<sup>2</sup>)</em> matrix</td>
+      </tr>
+      <tr>
+        <td><strong>Read Cost / Step</strong></td>
+        <td><em>O(T)</em> attention</td>
+        <td><em>O(d<sup>2</sup>)</em> matrix-vector product</td>
+        <td><em>O(d<sup>2</sup>)</em> recurrent update</td>
+        <td><em>O(d<sup>2</sup>)</em> matrix-vector product</td>
+      </tr>
+      <tr>
+        <td><strong>Adaptation Rule</strong></td>
+        <td>Context concatenation</td>
+        <td>Linear associative sum</td>
+        <td>Learned <em>S<sub>t</sub> = U<sub>&theta;</sub>(S<sub>t-1</sub>, D<sub>t</sub>)</em></td>
+        <td>Rank-1 write <em>S<sub>t</sub> = S<sub>t-1</sub> + v<sub>t</sub> k<sub>t</sub><sup>T</sup></em></td>
+      </tr>
+      <tr>
+        <td><strong>Capacity</strong></td>
+        <td>Bounded by GPU RAM</td>
+        <td>Bounded by dimension <em>d</em></td>
+        <td>Bounded by state &amp; gating</td>
+        <td>Bounded by dimension <em>d</em> (&le; <em>d</em> orthogonal keys)</td>
+      </tr>
+      <tr>
+        <td><strong>Interference</strong></td>
+        <td>Zero (exact dictionary)</td>
+        <td>Linear geometric overlap</td>
+        <td>Controlled via forget gates</td>
+        <td>Exact leakage: &sum;<sub>b &ne; a</sub> [(k<sub>a</sub>&middot;k<sub>b</sub>)/(k<sub>a</sub>&middot;k<sub>a</sub>)] v<sub>b</sub></td>
+      </tr>
+      <tr>
+        <td><strong>Interpretability</strong></td>
+        <td>Attention token weights</td>
+        <td>Associative matrix</td>
+        <td>Black-box learned <em>U<sub>&theta;</sub></em></td>
+        <td>100% transparent linear algebra</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Literature Grounding &amp; Honest Scope Boundary</h2>
+  <p>
+    <strong>BDH-CQ (Engdahl, Kosowski, Chorowski, Stamirowska et al., 2026 &mdash; arXiv:2608.09888):</strong> §3.2 formalizes demonstration adaptation as a recurrent state update <em>S<sub>t</sub> = U<sub>&theta;</sub>(S<sub>t-1</sub>, D<sub>t</sub>)</em>, citing the linear additive update <em>S<sub>t</sub> = S<sub>t-1</sub> + U<sub>&theta;</sub>(D<sub>t</sub>)</em> as the linear fast-weight representation. BDH-CQ proves recurrent state can solve symbolic reasoning benchmarks (e.g. ARC-AGI) without written chain-of-thought tokens.<br>
+    <strong>The Dragon Hatchling / BDH (Kosowski et al., 2025 &mdash; arXiv:2509.26507):</strong> Formulates self-attention as fast Hebbian synaptic plasticity, treating inference memory as an active biological conductance state.<br>
+    <strong>Mamba / State Spaces (Gu &amp; Dao, 2023 &mdash; arXiv:2312.00752):</strong> Analyzes theoretical compression limits within fixed recurrent dimensions.<br>
+    <strong>Pre-2022 Foundations:</strong> Schlag et al. (ICML 2021) and Katharopoulos et al. (ICML 2020) established outer-product fast weight programming and recurrent linear attention.
+  </p>
+  <div class="boundary-box">
+    <strong>Explicit Non-Claim:</strong> TRACE is an educational toy model instantiating the additive special case named in BDH-CQ §3.2. TRACE does <em>not</em> replicate BDH-CQ's proprietary learned <em>U<sub>&theta;</sub></em>, deep non-linear gating, ~5% biological activation sparsity, or ARC-AGI benchmark weights.
+  </div>
+
+  <h2>5. Empirical Verification &amp; Evidence</h2>
+  <ul>
+    <li><strong>Lossless Recall (<em>d</em>=3):</strong> Absorbing <code>red&rarr;1.0, blue&rarr;2.0, green&rarr;3.0</code> into <em>S</em><sub>3</sub> &isin; &reals;<sup>3&times;3</sup>. Constructing orthonormal keys via QR decomposition (<em>k<sub>i</sub> &middot; k<sub>j</sub></em> = 0) guarantees zero cross-talk; query <code>green</code> returns <strong>3.000</strong> with <strong>0.000 error</strong>.</li>
+    <li><strong>Geometric Interference (<em>d</em>=2):</strong> Demonstrating (<em>k<sub>A</sub></em> &rarr; 1.0) and (<em>k<sub>B</sub></em> &rarr; 9.0) with overlap <em>k<sub>A</sub> &middot; k<sub>B</sub></em> = 0.60. Readout &ycirc;<sub>A</sub> = 1.0 + 0.60 &times; 9.0 = <strong>6.400</strong>, matching theoretical leakage (+5.400) to float64 machine precision.</li>
+    <li><strong>Capacity Phase Transition (<em>d</em> &isin; [2, 6]):</strong> For <em>N</em>=4 demonstrations, error is substantial at <em>d</em>=2 (MSE = 3.13), but drops to machine precision (1.26 &times; 10<sup>-31</sup>) at <em>d</em> &ge; 4 as an orthogonal basis becomes available.</li>
+    <li><strong>Dual-Engine Parity:</strong> Python (<code>core/linear_memory.py</code>) and TypeScript twin (<code>web/src/memory/linear_memory.ts</code>) match with &lt; 10<sup>-9</sup> tolerance across 10 Python pytest tests and 4 Node.js parity tests. Reproducible notebook: <code>notebook/recurrent_memory.ipynb</code>.</li>
+  </ul>
+
+  <h2>6. Limitations &amp; Open Research Questions</h2>
+  <p>
+    <strong>Geometric Capacity Limit:</strong> A linear matrix in &reals;<sup><em>d&times;d</em></sup> stores at most <em>d</em> orthogonal keys. When <em>T &gt; d</em>, interference is mathematically guaranteed.<br>
+    <strong>Absence of Learned Gating:</strong> Production models (Mamba, BDH-CQ) mitigate capacity limits via input/forget gates that overwrite stale memories.<br>
+    <strong>The Unanswered Question:</strong> In biological models like BDH, does extreme activation sparsity (~5% active) provide near-lossless pseudo-orthogonal capacity in high dimensions without explicit QR orthogonalization?
+  </p>
+
+</body>
+</html>
