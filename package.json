@@ -1,0 +1,13 @@
+{
+  "name": "trace",
+  "version": "1.0.0",
+  "description": "TRACE: In-Context Learning with Recurrent Memory",
+  "type": "module",
+  "scripts": {
+    "test:py": ".venv/bin/python3 -m pytest tests/test_linear_memory.py",
+    "test:ts": "node --test tests/test_ts_parity.mjs",
+    "test": "npm run test:py && npm run test:ts",
+    "dev": "npm run dev --prefix web",
+    "build": "npm run build --prefix web"
+  }
+}
