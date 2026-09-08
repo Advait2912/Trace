@@ -16,8 +16,8 @@
 
 | Deliverable | Location / URL | Description |
 | :--- | :--- | :--- |
-| **Public Artifact URL** | [https://advait2912.github.io/TRACE/](https://advait2912.github.io/TRACE/) | Interactive visual explainer web app (runs 100% client-side, zero sign-in). |
-| **Public Source Repository** | [https://github.com/Advait2912/TRACE](https://github.com/Advait2912/TRACE) | Full source code, test suites, golden fixtures, and research documents. |
+| **Public Artifact URL** | [https://advait2912.github.io/TRACE/](https://advait2912.github.io/Trace/) | Interactive visual explainer web app (runs 100% client-side, zero sign-in). |
+| **Public Source Repository** | [https://github.com/Advait2912/TRACE](https://github.com/Advait2912/Trace) | Full source code, test suites, golden fixtures, and research documents. |
 | **Full Visual Essay / Blog PDF** | [`docs/TRACE_Visual_Essay.pdf`](docs/TRACE_Visual_Essay.pdf) | Complete 4-page visual essay export formatted for print and offline review. |
 | **Evaluated 1-Page Summary PDF** | [`docs/one-page-summary.pdf`](docs/one-page-summary.pdf) | Single-page executive summary deliverable. |
 | **Reproducible Notebook** | [`notebook/recurrent_memory.ipynb`](notebook/recurrent_memory.ipynb) | Top-to-bottom scientific notebook reproducing all experimental figures. |
