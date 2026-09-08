@@ -1,0 +1,10 @@
+{
+  "hook_green_prediction": 3.0000000000000013,
+  "hook_green_ground_truth": 3.0,
+  "interference_leak_coefficient": 0.6,
+  "interference_blended_prediction": 6.3999999999999995,
+  "interference_expected_blend": 6.3999999999999995,
+  "capacity_mse_d2": 3.1332688809588607,
+  "capacity_mse_d4": 1.2634100435180267e-31,
+  "is_d4_zero_error": true
+}
