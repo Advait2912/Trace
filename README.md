@@ -136,7 +136,6 @@ TRACE/
 │   └── MATH_SPEC.md                  # Comprehensive mathematical spec
 ├── SOURCES.md                        # Primary literature grounding & citation matrix
 ├── AI_DISCLOSURE.md                  # Human supervision & AI tool provenance
-├── SUBMISSION_CHECKLIST.md           # Completed acceptance criteria checklist
 ├── .github/workflows/deploy.yml       # Automated GitHub Pages CI/CD deployment
 └── package.json                      # Root workspace scripts
 ```
