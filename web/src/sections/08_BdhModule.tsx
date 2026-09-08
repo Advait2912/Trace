@@ -34,7 +34,7 @@ export const BdhModuleSection: React.FC = () => {
             Our project’s update rule:
           </p>
           <div className="math-proof">
-            <code>{"S_t = S_{t-1} + v_t k_tᵀ"}</code>
+            <code>S<sub>t</sub> = S<sub>t-1</sub> + v<sub>t</sub> k<sub>t</sub>ᵀ</code>
           </div>
           <p>
             is the canonical, minimal linear realization of this concept: writing to memory is an

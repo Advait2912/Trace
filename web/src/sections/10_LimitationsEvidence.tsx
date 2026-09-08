@@ -21,8 +21,8 @@ export const LimitationsEvidenceSection: React.FC = () => {
           </p>
           <p>
             <strong>Relevance to TRACE:</strong> §3.2 directly names the general update rule{" "}
-            <code>{"S_t = U_θ(S_{t-1}, D_t)"}</code> and its additive special case{" "}
-            <code>{"S_t = S_{t-1} + U_θ(D_t)"}</code> that forms our computational core.
+            <code>S<sub>t</sub> = U<sub>&theta;</sub>(S<sub>t-1</sub>, D<sub>t</sub>)</code> and its additive special case{" "}
+            <code>S<sub>t</sub> = S<sub>t-1</sub> + U<sub>&theta;</sub>(D<sub>t</sub>)</code> that forms our computational core.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ export const LimitationsEvidenceSection: React.FC = () => {
       <div className="callout-card" style={{ marginTop: "24px", background: "rgba(255, 255, 255, 0.02)" }}>
         <h4>Foundational Mechanism Grounding (Pre-2022 Background)</h4>
         <p style={{ margin: "6px 0 0 0", fontSize: "0.95rem", color: "var(--text-secondary)" }}>
-          The outer-product update <code>{"v_t k_tᵀ"}</code> and normalized linear readout trace back to:
+          The outer-product update <code>v<sub>t</sub> k<sub>t</sub><sup>T</sup></code> and normalized linear readout trace back to:
           <br />
           • <strong>Schlag, Irie &amp; Schmidhuber (2021)</strong>: <em>Linear Transformers Are Secretly Fast Weight Programmers</em> (ICML 2021).
           <br />
@@ -77,8 +77,8 @@ export const LimitationsEvidenceSection: React.FC = () => {
         <h4>Honest Limitations of the Educational Model</h4>
         <ol className="limitations-list">
           <li>
-            <strong>Capacity Bounded by Dimension:</strong> A linear matrix in {"ℝ^(d×d)"}{" "}
-            can hold at most <em>d</em> mutually orthogonal keys. When the number of demonstrations {"T > d"},{" "}
+            <strong>Capacity Bounded by Dimension:</strong> A linear matrix in &reals;<sup>d&times;d</sup>{" "}
+            can hold at most <em>d</em> mutually orthogonal keys. When the number of demonstrations <em>T &gt; d</em>,{" "}
             interference is mathematically guaranteed by construction.
           </li>
           <li>

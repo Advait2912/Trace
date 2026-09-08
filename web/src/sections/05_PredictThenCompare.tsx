@@ -101,7 +101,7 @@ export const PredictThenCompareSection: React.FC<PredictCompareProps> = ({ fixtu
               <div className="stack-item">
                 <span className="stack-label">ACTUAL STATE RECALL</span>
                 <span className="stack-val primary">{modelPrediction.toFixed(2)}</span>
-                <span className="stack-sub">Computed via (S₃ · k_{selectedSymbol})</span>
+                <span className="stack-sub">Computed via (S<sub>3</sub> &middot; k<sub>{selectedSymbol}</sub>)</span>
               </div>
 
               <div className="stack-item">

@@ -17,7 +17,7 @@ export const TwoWaysToRememberSection: React.FC = () => {
           <h3>Growing Context (Transformers)</h3>
           <p>
             The model appends every token to a growing key-value cache.
-            Memory consumption scales linearly $O(T)$ with sequence length.
+            Memory consumption scales linearly <em>O(T)</em> with sequence length.
           </p>
 
           <div className="diagram-illustration">
@@ -43,7 +43,7 @@ export const TwoWaysToRememberSection: React.FC = () => {
           <h3>Evolving State (Fast Weights / BDH-CQ)</h3>
           <p>
             The model compresses every demonstration into a <strong>fixed-dimensional state tensor</strong>.
-            Memory size remains strictly constant $O(d^2)$ regardless of $T$.
+            Memory size remains strictly constant <em>O(d²)</em> regardless of sequence length <em>T</em>.
           </p>
 
           <div className="diagram-illustration">
@@ -60,7 +60,7 @@ export const TwoWaysToRememberSection: React.FC = () => {
           </div>
 
           <ul className="paradigm-traits">
-            <li><strong>Pros:</strong> Constant memory footprint; instantaneous $O(d^2)$ inference.</li>
+            <li><strong>Pros:</strong> Constant memory footprint; instantaneous <em>O(d²)</em> inference.</li>
             <li><strong>Cons:</strong> Fixed geometric capacity forces non-orthogonal keys to overlap and leak.</li>
           </ul>
         </div>

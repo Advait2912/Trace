@@ -47,7 +47,7 @@ export const InterferenceOverlappingKeysSection: React.FC<InterferenceSectionPro
         </p>
         <p>
           <strong>True representational interference</strong> occurs when two <em>distinct</em> keys
-          share an overlapping subspace ($k_A \cdot k_B \neq 0$). Because the recurrent state $S$ is an
+          share an overlapping subspace (<code>k<sub>A</sub> &middot; k<sub>B</sub> &ne; 0</code>). Because the recurrent state <em>S</em> is an
           additive accumulator, reading out one demonstration inevitably captures a projection of the other.
         </p>
       </div>
@@ -55,7 +55,7 @@ export const InterferenceOverlappingKeysSection: React.FC<InterferenceSectionPro
       <div className="interference-experiment-panel">
         <div className="panel-controls">
           <label>
-            Geometric Overlap ($k_A \cdot k_B$): <strong>{dotProduct.toFixed(2)}</strong>
+            Geometric Overlap (<code>k<sub>A</sub> &middot; k<sub>B</sub></code>): <strong>{dotProduct.toFixed(2)}</strong>
             <span className="sub-label">
               ({(Math.acos(clampedDot) * (180 / Math.PI)).toFixed(1)}° angle between key vectors)
             </span>

@@ -16,10 +16,10 @@ export const BdhCqModuleSection: React.FC = () => {
           In §3.2, the authors formalize demonstration adaptation as a recurrent state update:
         </p>
         <div className="math-proof">
-          <code>{"S_t = U_θ(S_{t-1}, D_t)"}</code>
+          <code>S<sub>t</sub> = U<sub>&theta;</sub>(S<sub>t-1</sub>, D<sub>t</sub>)</code>
         </div>
         <p>
-          and cite the additive special case <code>{"S_t = S_{t-1} + U_θ(D_t)"}</code> as the linear
+          and cite the additive special case <code>S<sub>t</sub> = S<sub>t-1</sub> + U<sub>&theta;</sub>(D<sub>t</sub>)</code> as the linear
           fast-weight / linear-attention representation of this process.
         </p>
       </div>
@@ -32,7 +32,7 @@ export const BdhCqModuleSection: React.FC = () => {
         </p>
         <p>
           <strong>BDH-CQ</strong> demonstrates that a recurrent state can absorb contextual demonstrations
-          directly into its latent memory state $S$, allowing the network to solve complex visual and
+          directly into its latent memory state <em>S</em>, allowing the network to solve complex visual and
           symbolic transformations without writing out reasoning steps into an expanding text context.
         </p>
       </div>
@@ -58,8 +58,8 @@ export const BdhCqModuleSection: React.FC = () => {
             <tr>
               <td><strong>Memory Mechanism</strong></td>
               <td>Synaptic strength, Hebbian writes</td>
-              <td>Recurrent contextual state S_t = U_θ(S_{"{t-1}"}, D_t)</td>
-              <td>Rank-1 outer-product S_t = S_{"{t-1}"} + v_t k_tᵀ</td>
+              <td>Recurrent contextual state S<sub>t</sub> = U<sub>&theta;</sub>(S<sub>t-1</sub>, D<sub>t</sub>)</td>
+              <td>Rank-1 outer-product S<sub>t</sub> = S<sub>t-1</sub> + v<sub>t</sub> k<sub>t</sub><sup>T</sup></td>
             </tr>
             <tr>
               <td><strong>In-Context Adaptation</strong></td>
@@ -76,13 +76,13 @@ export const BdhCqModuleSection: React.FC = () => {
             <tr>
               <td><strong>Recurrent State Structure</strong></td>
               <td>Yes (synapses)</td>
-              <td>Yes ($S$)</td>
-              <td>Yes (S ∈ ℝ^(d×d), dense matrix)</td>
+              <td>Yes (<em>S</em>)</td>
+              <td>Yes (S &isin; &reals;<sup>d&times;d</sup>, dense matrix)</td>
             </tr>
             <tr>
               <td><strong>What It Does Not Capture</strong></td>
               <td>Sparsity, training, scale</td>
-              <td>The actual proprietary $U_\theta$ function</td>
+              <td>The actual proprietary U<sub>&theta;</sub> function</td>
               <td>Non-linearity, learned structure, trained parameters</td>
             </tr>
           </tbody>
@@ -94,12 +94,12 @@ export const BdhCqModuleSection: React.FC = () => {
         <p>
           <strong>What our demo captures:</strong> The complete computation of our own educational toy
           model, which instantiates the additive special case named in BDH-CQ §3.2 (
-          <code>{"S_t = S_{t-1} + U_θ(D_t)"}</code> where <code>{"U_θ(D_t) = v_t k_tᵀ"}</code>).
+          <code>S<sub>t</sub> = S<sub>t-1</sub> + U<sub>&theta;</sub>(D<sub>t</sub>)</code> where <code>U<sub>&theta;</sub>(D<sub>t</sub>) = v<sub>t</sub> k<sub>t</sub><sup>T</sup></code>).
         </p>
         <p>
-          <strong>What it does not capture:</strong> BDH-CQ’s learned $U_\theta$, its training procedure,
+          <strong>What it does not capture:</strong> BDH-CQ’s learned U<sub>&theta;</sub>, its training procedure,
           deep architecture, sparsity, nonlinearities, scale, or empirical ARC-AGI performance.
-          Our model is 100% transparent to us; BDH-CQ’s $U_\theta$ is proprietary.
+          Our model is 100% transparent to us; BDH-CQ’s U<sub>&theta;</sub> is proprietary.
         </p>
       </div>
     </section>

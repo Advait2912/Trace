@@ -75,7 +75,7 @@ export const ManipulateSection: React.FC = () => {
       <h2 className="section-title">Direct Manipulation: Capacity vs. Sequence Length</h2>
 
       <p className="lead-paragraph">
-        Test the mathematical boundaries. Adjust the capacity dimension $d$, modify values,
+        Test the mathematical boundaries. Adjust the capacity dimension <em>d</em>, modify values,
         or add more demonstrations than dimensions to observe when interference begins.
       </p>
 
@@ -83,7 +83,7 @@ export const ManipulateSection: React.FC = () => {
       <div className="controls-panel">
         <div className="control-group">
           <label className="control-label">
-            State Dimension Capacity ($d$): <strong>{d}</strong>
+            State Dimension Capacity (<em>d</em>): <strong>{d}</strong>
           </label>
           <input
             type="range"

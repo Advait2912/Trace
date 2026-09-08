@@ -47,7 +47,7 @@ export const App: React.FC = () => {
         </div>
         <div className="header-right">
           <span className="citation-pill">
-            BDH-CQ §3.2 Special Case: <code>S_t = S_{"{t-1}"} + v_t k_tᵀ</code>
+            BDH-CQ §3.2 Special Case: <code>S<sub>t</sub> = S<sub>t-1</sub> + v<sub>t</sub> k<sub>t</sub>ᵀ</code>
           </span>
         </div>
       </header>

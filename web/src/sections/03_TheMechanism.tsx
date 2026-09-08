@@ -51,7 +51,7 @@ export const TheMechanismSection: React.FC = () => {
           </div>
           <div className="eq-line highlight">
             <span className="eq-sym">Update:</span>
-            <code>{"S_t = S_{t-1} + v_t k_tᵀ"}</code>
+            <code>S<sub>t</sub> = S<sub>t-1</sub> + v<sub>t</sub> k<sub>t</sub>ᵀ</code>
             <span className="annotation">(rank-1 outer product write)</span>
           </div>
           <div className="eq-line">
@@ -122,7 +122,7 @@ export const TheMechanismSection: React.FC = () => {
           </div>
           <p>
             Dividing by <code>(k_a · k_a)</code> isolates <code>v_a</code> cleanly whenever all other
-            keys are orthogonal (<code>k_i · k_a = 0</code> for $i \neq a$).
+            keys are orthogonal (<code>k_i · k_a = 0</code> for <em>i &ne; a</em>).
           </p>
         </div>
         <div>

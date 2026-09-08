@@ -75,12 +75,12 @@ export const HookSection: React.FC<HookSectionProps> = ({ fixtures }) => {
           <h3>No Growing Context Window. One Fixed Matrix.</h3>
           <p>
             Standard Transformer LLMs remember demonstrations by expanding an explicit
-            Key-Value (KV) cache with sequence length $O(T)$. As sequences grow, the memory
+            Key-Value (KV) cache with sequence length <em>O(T)</em>. As sequences grow, the memory
             footprint expands indefinitely.
           </p>
           <p>
-            In contrast, the recurrent memory displayed on the right holds exactly <strong>9 numbers</strong> ($3 \times 3$).
-            It absorbed all three demonstrations into a single accumulative state $S_3$.
+            In contrast, the recurrent memory displayed on the right holds exactly <strong>9 numbers</strong> (3 &times; 3).
+            It absorbed all three demonstrations into a single accumulative state <code>S₃</code>.
             Because the three key vectors were constructed to be mutually orthogonal,
             querying <code>green</code> extracts its exact value with <strong>zero leakage</strong> from <code>red</code> or <code>blue</code>.
           </p>
